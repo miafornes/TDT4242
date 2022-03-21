@@ -88,55 +88,55 @@ async function retrieveWorkoutImages(id) {
     return workoutData;     
 }
 
-function getWorkoutDataImgFiles(workoutDataFiles) {
-    let imgFiles = [];
-    let isImage = ["jpg", "png", "gif", "jpeg", "JPG", "PNG", "GIF", "JPEG"]
-    for (let file of workoutDataFiles) {
-        if (isImage.includes(file)) {
-            imgFiles.push(file);
-        }
-    }
-    return imgFiles;
-}
+// function getWorkoutDataImgFiles(workoutDataFiles) {
+//     let imgFiles = [];
+//     let isImage = ["jpg", "png", "gif", "jpeg", "JPG", "PNG", "GIF", "JPEG"]
+//     for (let file of workoutDataFiles) {
+//         if (isImage.includes(file)) {
+//             imgFiles.push(file);
+//         }
+//     }
+//     return imgFiles;
+// }
 
-async function validateImgFileType(id, host_variable, acceptedFileTypes) {
-    let file = await sendRequest("GET", `${host_variable}/api/workout-files/${id}/`);
-    let fileData = await file.json();
-    let fileType = fileData.file.split("/")[fileData.file.split("/").length - 1].split(".")[1];
+// async function validateImgFileType(id, host_variable, acceptedFileTypes) {
+//     let file = await sendRequest("GET", `${host_variable}/api/workout-files/${id}/`);
+//     let fileData = await file.json();
+//     let fileType = fileData.file.split("/")[fileData.file.split("/").length - 1].split(".")[1];
     
-    return acceptedFileTypes.includes(fileType);
-}
+//     return acceptedFileTypes.includes(fileType);
+// }
 
-async function handleDeleteImgClick (id, http_keyword, fail_alert_text, host_variable, acceptedFileTypes) {
+// async function handleDeleteImgClick (id, http_keyword, fail_alert_text, host_variable, acceptedFileTypes) {
     
-    if(validateImgFileType(id, host_variable, acceptedFileTypes, )){
-        return
-    }
+//     if(validateImgFileType(id, host_variable, acceptedFileTypes, )){
+//         return
+//     }
 
-    let response = await sendRequest(http_keyword, `${host_variable}/api/workout-files/${id}/`);
+//     let response = await sendRequest(http_keyword, `${host_variable}/api/workout-files/${id}/`);
 
-    if (!response.ok) {
-        let data = await response.json();
-        let alert = createAlert(fail_alert_text, data);
-        document.body.prepend(alert);
-    } else {
-        location.reload();
-    }
-}
+//     if (!response.ok) {
+//         let data = await response.json();
+//         let alert = createAlert(fail_alert_text, data);
+//         document.body.prepend(alert);
+//     } else {
+//         location.reload();
+//     }
+// }
 
-function handleGoBackToWorkoutClick() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
-    window.location.replace(`workout.html?id=${id}`);
-}
+// function handleGoBackToWorkoutClick() {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const id = urlParams.get('id');
+//     window.location.replace(`workout.html?id=${id}`);
+// }
 
-window.addEventListener("DOMContentLoaded", async () => {
+// window.addEventListener("DOMContentLoaded", async () => {
 
-    goBackButton = document.querySelector("#btn-back-workout");
-    goBackButton.addEventListener('click', handleGoBackToWorkoutClick);
+//     goBackButton = document.querySelector("#btn-back-workout");
+//     goBackButton.addEventListener('click', handleGoBackToWorkoutClick);
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
-    let workoutData = await retrieveWorkoutImages(id);   
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const id = urlParams.get('id');
+//     let workoutData = await retrieveWorkoutImages(id);   
 
-});
+// });
